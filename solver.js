@@ -180,7 +180,7 @@ function startSolver() {
 
 		for (var i = toUpdate.length - 1; i >= 0; i--) {
 			if(!toUpdate[i].active) toUpdate[i].active = true;
-			if(!toUpdate[i].locked) {
+			if(!(toUpdate[i].locked || toUpdate[i].wall))  {
 				toUpdate[i].update(currentNode);
 				activeNodes.push(toUpdate[i]);
 			}
