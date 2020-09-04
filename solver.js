@@ -55,8 +55,8 @@ function init() {
 function initGrid() {
 	let table = $("table");
 	for (var row = 0; row < 9; row++) {
-		let tr = document.createElement("div");
-		tr.classList.add("tableTr");
+		//let tr = document.createElement("div");
+		//tr.classList.add("tableTr");
 
 		for (var col = 0; col < 9; col++) {
 			let tc = document.createElement("div");
@@ -68,10 +68,10 @@ function initGrid() {
 			animObj.classList.add("animObj");
 			tc.appendChild(animObj);
 
-			tr.appendChild(tc);
+			table.appendChild(tc);
 		}
 
-		table.appendChild(tr);
+		//table.appendChild(tr);
 	}
 
 	$("solve").addEventListener("click", startSolver);

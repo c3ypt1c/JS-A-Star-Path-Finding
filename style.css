@@ -88,7 +88,8 @@ h2, ol {
 }
 
 #table {
-	display: table;
+	display: grid;
+	grid-template-columns: repeat(9,1fr);
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 1em;
@@ -110,10 +111,6 @@ h2, ol {
 	position: relative;
 	display: block;
 	margin: auto auto auto auto;
-}
-
-.possible {
-	background-color: #A2FF98;
 }
 
 #loading {
@@ -159,7 +156,7 @@ h2, ol {
 
 .cell.wall {
 	opacity: #0000;
-	border: #0000;
+	border: solid 1px #0000;
 }
 
 .cell .animObj {
@@ -178,9 +175,26 @@ h2, ol {
 }
 
 .cell.start .animObj {
-	background-color: red;
+	background-color: #814777;
 }
 
 .cell.end .animObj {
-	background-color: blue;
+	background-color: #475081;
+}
+
+#instructions .current {
+
+}
+
+#selectSize {
+	display: flex;
+	flex-direction: column; 
+	margin-top: 2em;
+}
+
+#selectSize > * {
+	min-width: 10em;
+	width: 30%;
+	margin-right: auto;
+	margin-left: auto;
 }
