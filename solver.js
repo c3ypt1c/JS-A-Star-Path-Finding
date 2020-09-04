@@ -49,16 +49,20 @@ function flip(obj) {
 }
 
 function init() {
-	initGrid();
+	$("createGrid").addEventListener("click", createTable);
+	$("solve").addEventListener("click", startSolver);
+	$("reset").addEventListener("click", reset);
 }
 
-function initGrid() {
-	let table = $("table");
-	for (var row = 0; row < 9; row++) {
-		//let tr = document.createElement("div");
-		//tr.classList.add("tableTr");
+function createTable() {
+	reset();
+	let rows = $("height").value;
+	let cols = $("width").value;
 
-		for (var col = 0; col < 9; col++) {
+	let table = $("table");
+	for (var row = 0; row < rows; row++) {
+
+		for (var col = 0; col < cols; col++) {
 			let tc = document.createElement("div");
 			tc.classList.add("tableTc");
 			tc.classList.add("cell");
@@ -70,12 +74,10 @@ function initGrid() {
 
 			table.appendChild(tc);
 		}
-
-		//table.appendChild(tr);
 	}
 
-	$("solve").addEventListener("click", startSolver);
-	$("reset").addEventListener("click", reset);
+	$("table").style = "grid-template-columns: repeat("+ cols + ",1fr);";
+
 	$("tableWrapper").classList.add("loadedTable");
 }
 
@@ -88,4 +90,5 @@ function reset() {
 	let table = $("table");
 	table.textContent = "";
 	init();
+	state = 1;
 }

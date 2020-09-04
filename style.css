@@ -85,6 +85,9 @@ h2, ol {
 #tableWrapper {
 	margin-top: 3em;
 	transition: all 5s ease;
+	width: min-content;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #table {
@@ -103,8 +106,8 @@ h2, ol {
 .tableTc {
 	display: table-cell;
 	border: 1px #000 solid;
-	height:4rem;
-	width: 4rem;
+	height: 2rem;
+	width: 2rem;
 }
 
 .tableTc .wrapper {
