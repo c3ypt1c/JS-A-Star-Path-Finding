@@ -28,6 +28,10 @@ let state = 1;
 
 function flip(obj) {
 	switch(state) {
+		case 0:
+		state--;
+		break;
+
 		case 1:
 		obj.classList.add("start");
 		//note down where
@@ -59,6 +63,11 @@ function initGrid() {
 			tc.classList.add("tableTc");
 			tc.classList.add("cell");
 			tc.addEventListener("click", function() {flip(tc);} );
+
+			let animObj = document.createElement("div");
+			animObj.classList.add("animObj");
+			tc.appendChild(animObj);
+
 			tr.appendChild(tc);
 		}
 
