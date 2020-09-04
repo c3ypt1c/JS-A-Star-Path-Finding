@@ -11,13 +11,20 @@
 
 		<div id="instructions">
 			<h2>Instructions:</h2>
-			<p>Select a start point</p>
-			<p>Select an end point</p>
-			<p>Draw obstacles</p>
+			<p id="inst0">Select a grid size</p>
+			<p id="inst1">Select a start point</p>
+			<p id="inst2">Select an end point</p>
+			<p id="inst3">Draw obstacles</p>
 		</div>
 		
 		<div id="tableWrapper">
 			<div id="table"></div>
+		</div>
+
+		<div class="buttons">
+			<div class="primary button" id="solve">Find Path</div>
+			<div class="button" id="reset">Restart</div>
+			<div class="button" id="test">Random</div>
 		</div>
 
 		<div id="loading" class="popup hidden">

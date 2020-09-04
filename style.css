@@ -83,6 +83,7 @@ h2, ol {
 }
 
 #tableWrapper {
+	margin-top: 3em;
 	transition: all 5s ease;
 }
 
@@ -151,4 +152,20 @@ h2, ol {
 .hidden {
 	opacity: 0 !important;
 	clip-path: circle(0%) !important;
+}
+
+.cell {
+	transition: background 0.2s ease;
+}
+
+.cell.wall {
+	background-color: #0000;
+}
+
+.cell.start {
+	background-color: red;
+}
+
+.cell.end {
+	background-color: blue;
 }
