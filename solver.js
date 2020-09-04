@@ -123,7 +123,7 @@ class ASNode {
 	}
 
 	distanceTo(node) {
-		return Math.hypot(this.row - node.row, this.col - node.col);
+		return Math.hypot(node.row - this.row, node.col - this.col);
 	}
 }
 
@@ -138,7 +138,7 @@ function startSolver() {
 	while (activeNodes.length > 0) {
 		//debugger;
 		activeNodes.sort(function(a, b) {
-			return a.fCost = b.fCost;
+			return a.fCost - b.fCost;
 		});
 
 		let currentNode = activeNodes[0];
