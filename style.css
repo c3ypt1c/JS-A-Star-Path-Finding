@@ -185,7 +185,9 @@ h2, ol {
 	background-color: #475081;
 }
 
-
+.cell.path .animObj {
+	background-color: #777;
+}
 
 #instructions .current {
 
