@@ -127,6 +127,8 @@ class ASNode {
 	}
 }
 
+let allowDiagMov = true;
+
 function startSolver() {
 	if(state < 2) return;
 	startNode.active = true;
@@ -164,15 +166,15 @@ function startSolver() {
 		if(rowPositive) {
 			toUpdate.push(grid[row + 1][col]);
 
-			if(colNegative) toUpdate.push(grid[row + 1][col - 1]);
-			if(colPositive) toUpdate.push(grid[row + 1][col + 1]);
+			if(colNegative && allowDiagMov) toUpdate.push(grid[row + 1][col - 1]);
+			if(colPositive && allowDiagMov) toUpdate.push(grid[row + 1][col + 1]);
 		}
 
 		if(rowNegative) {
 			toUpdate.push(grid[row - 1][col]);
 
-			if(colNegative) toUpdate.push(grid[row - 1][col - 1]);
-			if(colPositive) toUpdate.push(grid[row - 1][col + 1]);
+			if(colNegative && allowDiagMov) toUpdate.push(grid[row - 1][col - 1]);
+			if(colPositive && allowDiagMov) toUpdate.push(grid[row - 1][col + 1]);
 		}
 
 		if(colNegative) toUpdate.push(grid[row][col - 1]);
