@@ -87,68 +87,31 @@ function createTable() {
 
 	state = 1;
 }
+
 let grid = [];
 let startNode;
 let endNode;
 
-class ASNode {
-	constructor(row, col, htmlDOMObject) {
-		this.locked = false;
-		this.active = false;
-		this.wall = false;
-		
-		this.htmlDOMObject = htmlDOMObject;
-		this.row = row;
-		this.col = col;
-
-		this.hCost = null; //distance to end;
-		this.gCost = null; //distance from start
-		this.origin = null;		
-	}
-
-	get fCost () {
-		if(this.hCost == null) this.hCost = this.distanceTo(endNode);
-		return this.gCost + this.hCost;
-	}
-
-	update(origin) {
-		if(!this.locked && !this.wall && (this.gCost == null || origin.gCost + this.distanceTo(origin) < this.gCost) ) {
-			this.gCost = origin.gCost + this.distanceTo(origin);
-			this.origin = origin;
-		} 
-	}
-
-	toggleWall() {
-		this.wall = !this.wall;
-	}
-
-	distanceTo(node) {
-		return Math.hypot(node.row - this.row, node.col - this.col);
-	}
-}
-
 let allowDiagMov = true;
 
 function startSolver() {
+	console.log("Starting Solver");
 	if(state < 2) return;
 	startNode.active = true;
-	startNode.locked = true;
 	startNode.gCost = 0;
 
-	let activeNodes = [startNode];
+	let activeNodes = new ASNodeArraySet();
+	activeNodes.add(startNode);
 
 	while (activeNodes.length > 0) {
-		//debugger;
-		activeNodes.sort(function(a, b) {
-			return a.fCost - b.fCost;
-		});
 
-		let currentNode = activeNodes[0];
-		activeNodes.splice(0, 1);
-		currentNode.locked = true;
-
+		let currentNode = activeNodes.popFirst();
 		console.log("Looking at:");
 		console.log(currentNode);
+
+		if(currentNode.locked) continue;
+
+		currentNode.locked = true;
 
 		if(currentNode == endNode) break;
 
@@ -182,9 +145,8 @@ function startSolver() {
 
 		for (var i = toUpdate.length - 1; i >= 0; i--) {
 			if(!toUpdate[i].active) toUpdate[i].active = true;
-			if(!(toUpdate[i].locked || toUpdate[i].wall))  {
-				toUpdate[i].update(currentNode);
-				activeNodes.push(toUpdate[i]);
+			if(!(toUpdate[i].locked || toUpdate[i].wall)) {
+				if(toUpdate[i].update(currentNode)) activeNodes.add(toUpdate[i]);;
 			}
 		}
 	}
