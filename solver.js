@@ -1,3 +1,6 @@
+//Settings
+let allowDiagMov = true;
+
 function $(id) {
 	return document.getElementById(id);
 }
@@ -92,11 +95,9 @@ let grid = [];
 let startNode;
 let endNode;
 
-let allowDiagMov = true;
-
 function startSolver() {
 	console.log("Starting Solver");
-	if(state < 2) return;
+
 	startNode.active = true;
 	startNode.gCost = 0;
 
@@ -109,7 +110,10 @@ function startSolver() {
 		console.log("Looking at:");
 		console.log(currentNode);
 
-		if(currentNode.locked) continue;
+		if(currentNode.locked) {
+			activeNodes.remove(currentNode);
+			continue;
+		}
 
 		currentNode.locked = true;
 
@@ -144,9 +148,13 @@ function startSolver() {
 		if(colPositive) toUpdate.push(grid[row][col + 1]);
 
 		for (var i = toUpdate.length - 1; i >= 0; i--) {
-			if(!toUpdate[i].active) toUpdate[i].active = true;
 			if(!(toUpdate[i].locked || toUpdate[i].wall)) {
-				if(toUpdate[i].update(currentNode)) activeNodes.add(toUpdate[i]);;
+				if(!toUpdate[i].active) {
+					toUpdate[i].update(currentNode);
+					activeNodes.add(toUpdate[i]);
+					toUpdate[i].active = true;
+				}
+				else if(toUpdate[i].update(currentNode)) activeNodes.update(toUpdate[i]);
 			}
 		}
 	}
@@ -155,13 +163,15 @@ function startSolver() {
 		console.log("in path:");
 		let backNode = endNode.origin;
 		while(true) {
-			if(backNode == startNode) break;
+			if(backNode == startNode) {
+				showSolved();
+				break;
+			}
 			console.log(backNode);
 			backNode.htmlDOMObject.classList.add("path");
 			backNode = backNode.origin;
 		}
 	}
-
 }
 
 function reset() {

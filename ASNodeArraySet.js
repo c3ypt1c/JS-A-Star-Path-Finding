@@ -16,14 +16,18 @@ class ASNodeArraySet {
 		else return check;
 	}
 
+	get length() {
+		return this.content.length;
+	}
+
 	add(item) {
 		let index = this.bestGuessBinarySearch(item);
-		
 		if(index == this.content.length) this.content.push(item);
 
-		else if(this.content[index] != item)
-				if(index == 0 || this.content[index].fCost > item.fCost)	this.content.splice(index, 0, item);
-				else														this.content.splice(index + 1, 0, item);
+		else if(this.content[index] != item) {
+			if(index == 0 || this.content[index].fCost > item.fCost) this.content.splice(index, 0, item);
+			else this.content.splice(index + 1, 0, item);
+		}
 	}
 
 	popFirst() {
@@ -32,9 +36,13 @@ class ASNodeArraySet {
 		return item;
 	}
 
-	get length() {
-		return this.content.length;
+	remove(item) {
+		let index = this.bestGuessBinarySearch(item);
+		if (this.content[index] == item) this.content.splice(index, 1);
 	}
 
-
+	update(item) {
+		this.remove(item);
+		this.add(item);
+	}
 }
