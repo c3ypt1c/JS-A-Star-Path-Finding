@@ -1,3 +1,5 @@
+/* @author Lukasz Baldyga
+*/
 class ASNode {
 	constructor(row, col, htmlDOMObject) {
 		this.locked = false;

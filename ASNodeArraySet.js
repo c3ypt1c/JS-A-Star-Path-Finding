@@ -1,3 +1,5 @@
+/* @author Lukasz Baldyga
+*/
 class ASNodeArraySet {
 	constructor() {
 		this.content = [];
